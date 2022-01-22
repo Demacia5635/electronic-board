@@ -3,7 +3,7 @@ let boardSize = {
     height: 300
 }
 
-let prop = 300 / 1598;
+let prop = 200 / 300;
 let addTalon, addRobo, addPDP, addBreaker, addVRM, addRadio;
 let changeBoardSize, widthIn, heightIn;
 let elements = [];
@@ -13,33 +13,38 @@ let pictures = {
     "robo": "",
     "vrm": "",
     "radio": "",
-    "breaker": ""
+    "breaker": "",
+    "pi": ""
 }
 
 let sizes = {
     "pdp": {
-        width: 1598 * prop,
-        height: 1010 * prop
+        width: 192.6844 / prop,
+        height: 120 / prop
     },
     "robo": {
-        width: 982 * prop,
-        height: 966 * prop
+        width: 146.15 / prop,
+        height: 143.18 / prop
     },
     "talon": {
-        width: 204 * prop,
-        height: 494 * prop
+        width: 30 / prop,
+        height: 69.85 / prop
     },
     "vrm": {
-        width: 341 * prop,
-        height: 312 * prop
+        width: 56.38 / prop,
+        height: 51.56 / prop
     },
     "radio": {
-        width: 360 * prop,
-        height: 480 * prop
+        width: 69.85 / prop,
+        height: 95.25 / prop
     },
     "breaker": {
-        width: 301 * prop,
-        height: 454 * prop
+        width: 48.26 / prop,
+        height: 73.66 / prop
+    },
+    "pi": {
+        width: 85 / prop,
+        height: 56 / prop
     }
 }
 
@@ -50,6 +55,7 @@ function preload() {
     pictures["vrm"] = loadImage("https://raw.githubusercontent.com/MittyRobotics/tko-electronics-sim/master/assets/img/hardware/vrm.png");
     pictures["robo"] = loadImage("https://raw.githubusercontent.com/MittyRobotics/tko-electronics-sim/master/assets/img/hardware/roborio.png");
     pictures["breaker"] = loadImage("https://raw.githubusercontent.com/MittyRobotics/tko-electronics-sim/master/assets/img/hardware/breaker.png");
+    pictures["pi"] = loadImage("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQV177_cY8jMSjXrogjGpuRrfKUUBd0fcuL5Q&usqp=CAU");
 }
 
 function setup() {
@@ -81,7 +87,7 @@ function draw() {
 }
 
 function Canvas() {
-    createCanvas(boardSize.width * 1598 * prop / 200, boardSize.height * 1598 * prop / 200).position(0, 0);
+    createCanvas(boardSize.width / prop, boardSize.height / prop).position(0, 0);
 
     createButton("Add PDP").position(width + 10, 10).mousePressed(() => elements.push(new Part("pdp", 0, 0)))
     createButton("Add RoboRIO").position(width + 10, 40).mousePressed(() => elements.push(new Part("robo", 0, 0)))
@@ -89,6 +95,7 @@ function Canvas() {
     createButton("Add VRM").position(width + 10, 100).mousePressed(() => elements.push(new Part("vrm", 0, 0)))
     createButton("Add Radio").position(width + 10, 130).mousePressed(() => elements.push(new Part("radio", 0, 0)))
     createButton("Add Breaker").position(width + 10, 160).mousePressed(() => elements.push(new Part("breaker", 0, 0)))
+    createButton("Add Raspberry Pi").position(width + 10, 190).mousePressed(() => elements.push(new Part("pi", 0, 0)))
 
     createButton("Delete Element").position(173.43, height + 12).mousePressed(deleteElement);
     createButton("Clear Board").position(290.57, height + 12).mousePressed(clearBoard);
