@@ -69,6 +69,16 @@ function setup() {
 function draw() {
     background("#872dff");
 
+    stroke(0);
+    strokeWeight(2);
+    for (let i = 0; i < width; i += 50) {
+        line(i, 0, i, height);
+    }
+
+    for (let i = 0; i < height; i += 50) {
+        line(0, i, width, i);
+    }
+
     for (let i = 0; i < elements.length; i++) {
         part = elements[i];
         push();
