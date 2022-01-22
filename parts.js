@@ -15,4 +15,8 @@ class Part {
 
         this.picture = type;
     }
+
+    isRotated() {
+        return this.rotate % 180 == 0;
+    }
 }

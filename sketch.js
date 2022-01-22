@@ -63,6 +63,7 @@ function preload() {
 }
 
 function setup() {
+    angleMode(DEGREES);
     Canvas();
 }
 
@@ -82,7 +83,7 @@ function draw() {
     for (let i = 0; i < elements.length; i++) {
         part = elements[i];
         push();
-        translate(part.position.x + part.width / 2, part.position.y + part.height / 2)
+        translate(part.position.x + (part.isRotated() ? part.width : part.height) / 2, part.position.y + (part.isRotated() ? part.height : part.width) / 2)
         rotate(part.rotate);
         if (part.selected) {
             strokeWeight(7);
@@ -149,7 +150,14 @@ function mousePressed() {
             elements[i].selected = false;
         }
     }
-    let found = elements.find(el => Math.abs(el.position.x + el.width / 2 - mouseX) <= 20 && Math.abs(el.position.y + el.height / 2 - mouseY) <= 20)
+    let found = elements.find(el => {
+        let distanceX = mouseX - el.position.x;
+        let distanceY = mouseY - el.position.y;
+        if (distanceX < 0 || distanceY < 0) {
+            return false;
+        }
+        return distanceX < (el.isRotated() ? el.width : el.height) && distanceY < (el.isRotated() ? el.height : el.width);
+    })
     if (found != undefined) {
         found.selected = true;
         found.moveable = true;
@@ -182,7 +190,7 @@ function mouseReleased() {
 function rotateElement() {
     let found = elements.find(el => el.selected);
     if (found != undefined) {
-        found.rotate += PI / 2;
+        found.rotate += 90;
     }
 }
 
