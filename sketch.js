@@ -72,11 +72,11 @@ function draw() {
 
     stroke(0);
     strokeWeight(2);
-    for (let i = 0; i < width; i += 50) {
+    for (let i = 0; i < width; i += 50 / prop) {
         line(i, 0, i, height);
     }
 
-    for (let i = 0; i < height; i += 50) {
+    for (let i = 0; i < height; i += 50 / prop) {
         line(0, i, width, i);
     }
 
@@ -130,8 +130,7 @@ function Canvas() {
     let a = document.getElementById("a");
     createButton("Create File").id("download");
     let downloadButton = document.getElementById("download");
-    downloadButton.onclick = "download('file text', 'board.json', 'text/json')";
-
+    downloadButton.onclick = () => download('file text', 'board.json', 'text/json');
     downloadButton.style.position = "absolute";
     downloadButton.style.left = `0px`;
     downloadButton.style.top = `${height + 130}px`
