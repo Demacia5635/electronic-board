@@ -81,7 +81,7 @@ function draw() {
 }
 
 function Canvas() {
-    createCanvas(boardSize.width * 1598 * prop / 200, boardSize.height * 1598 * prop / 200);
+    createCanvas(boardSize.width * 1598 * prop / 200, boardSize.height * 1598 * prop / 200).position(0, 0);
 
     createButton("Add PDP").position(width + 10, 10).mousePressed(() => elements.push(new Part("pdp", 0, 0)))
     createButton("Add RoboRIO").position(width + 10, 40).mousePressed(() => elements.push(new Part("robo", 0, 0)))
