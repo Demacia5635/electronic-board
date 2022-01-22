@@ -132,7 +132,7 @@ function Canvas() {
     createFileInput(fileImport).position(0, height + 190);
 }
 
-function touchStarted() {
+function mousePressed() {
     if (mouseX < width && mouseY < height) {
         for (let i = 0; i < elements.length; i++) {
             elements[i].selected = false;
@@ -155,7 +155,7 @@ function touchStarted() {
     console.log(found);
 }
 
-function touchEnded() {
+function mouseReleased() {
     let found = elements.find(el => el.selected && el.moveable);
     if (found != undefined) {
         found.moveable = false;
