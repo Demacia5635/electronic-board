@@ -4,8 +4,7 @@ let boardSize = {
 }
 
 let prop = 200 / 300;
-let addTalon, addRobo, addPDP, addBreaker, addVRM, addRadio;
-let changeBoardSize, widthIn, heightIn;
+let widthIn, heightIn;
 let elements = [];
 let pictures = {
     "pdp": "",
@@ -45,6 +44,10 @@ let sizes = {
     "pi": {
         width: 85 / prop,
         height: 56 / prop
+    },
+    "nano": {
+        width: 45 / prop,
+        height: 18 / prop
     }
 }
 
@@ -56,6 +59,7 @@ function preload() {
     pictures["robo"] = loadImage("https://raw.githubusercontent.com/MittyRobotics/tko-electronics-sim/master/assets/img/hardware/roborio.png");
     pictures["breaker"] = loadImage("https://raw.githubusercontent.com/MittyRobotics/tko-electronics-sim/master/assets/img/hardware/breaker.png");
     pictures["pi"] = loadImage("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQV177_cY8jMSjXrogjGpuRrfKUUBd0fcuL5Q&usqp=CAU");
+    pictures["nano"] = loadImage("https://cdn.shopify.com/s/files/1/1641/0911/products/nano-v30-micro-controller-with-atmega328p-16mhz-50v-ch340g-usb-driver-mini-usb-connector-439384_1200x1200.jpg?v=1633023487");
 }
 
 function setup() {
@@ -96,6 +100,7 @@ function Canvas() {
     createButton("Add Radio").position(width + 10, 130).mousePressed(() => elements.push(new Part("radio", 0, 0)))
     createButton("Add Breaker").position(width + 10, 160).mousePressed(() => elements.push(new Part("breaker", 0, 0)))
     createButton("Add Raspberry Pi").position(width + 10, 190).mousePressed(() => elements.push(new Part("pi", 0, 0)))
+    createButton("Add Arduino Nano").position(width + 10, 220).mousePressed(() => elements.push(new Part("nano", 0, 0)))
 
     createButton("Delete Element").position(173.43, height + 12).mousePressed(deleteElement);
     createButton("Clear Board").position(290.57, height + 12).mousePressed(clearBoard);
@@ -109,6 +114,22 @@ function Canvas() {
     createP(`Currently: ${boardSize.width / 10} (cm)`).position(380, height + 57);
 
     createButton("Change Board Dimensions").position(0, height + 97).mousePressed(changeDimensions);
+
+    createA("", "click here to download your file").id("a");
+    let a = document.getElementById("a");
+    createButton("Create File").id("download");
+    let downloadButton = document.getElementById("download");
+    downloadButton.onclick = "download('file text', 'board.json', 'text/json')";
+
+    downloadButton.style.position = "absolute";
+    downloadButton.style.left = `0px`;
+    downloadButton.style.top = `${height + 130}px`
+
+    a.style.position = "absolute";
+    a.style.left = `0px`;
+    a.style.top = `${height + 160}px`
+
+    createFileInput(fileImport).position(0, height + 190);
 }
 
 function touchStarted() {
@@ -172,4 +193,27 @@ function changeDimensions() {
     boardSize.height = parseFloat(heightIn.value()) * 10;
     document.getElementsByTagName("body")[0].innerHTML = "";
     Canvas();
+}
+
+function fileImport(file) {
+    file = file.data;
+    console.log(file);
+    boardSize = file["size"];
+    elements = file["elements"];
+    document.getElementsByTagName("body")[0].innerHTML = "";
+    Canvas();
+}
+
+function download(text, name, type) {
+    let boardInfo = {
+        "size": boardSize,
+        "elements": elements
+    }
+
+    boardInfo = JSON.stringify(boardInfo);
+
+    var a = document.getElementById("a");
+    var file = new Blob([boardInfo], { type: type });
+    a.href = URL.createObjectURL(file);
+    a.download = name;
 }
