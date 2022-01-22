@@ -11,3 +11,8 @@ canvas {
 p {
     color: white;
 }
+
+a:link {
+    color: lightblue;
+    display: block;
+}

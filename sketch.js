@@ -135,6 +135,7 @@ function Canvas() {
     downloadButton.style.left = `0px`;
     downloadButton.style.top = `${height + 130}px`
 
+    a.style.display = "none";
     a.style.position = "absolute";
     a.style.left = `0px`;
     a.style.top = `${height + 160}px`
@@ -227,6 +228,8 @@ function download(text, name, type) {
         "size": boardSize,
         "elements": elements
     }
+
+    document.getElementById("a").style.display = "block";
 
     boardInfo = JSON.stringify(boardInfo);
 
