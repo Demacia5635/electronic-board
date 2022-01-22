@@ -64,6 +64,7 @@ function preload() {
 
 function setup() {
     Canvas();
+    angleMode(DEGREES);
 }
 
 function draw() {
@@ -94,8 +95,8 @@ function draw() {
         pop();
 
         if (part.moveable) {
-            part.position.x = mouseX - part.width / 2;
-            part.position.y = mouseY - part.height / 2;
+            part.position.x = mouseX - part.width / 2 - part.mouseDis.x;
+            part.position.y = mouseY - part.height / 2 - part.mouseDis.y;
         }
     }
 }
@@ -149,7 +150,18 @@ function mousePressed() {
             elements[i].selected = false;
         }
     }
-    let found = elements.find(el => Math.abs(el.position.x + el.width / 2 - mouseX) <= 20 && Math.abs(el.position.y + el.height / 2 - mouseY) <= 20)
+    let found = elements.find(el => {
+        let rotated = (el.rotate % 180 != 0);
+        let dx = mouseX - el.position.x - el.width / 2;
+        let dy = mouseY - el.position.y - el.height / 2;
+
+        let onPart = ((Math.abs(dx) < ((rotated) ? (el.height / 2) : (el.width / 2))) && (Math.abs(dy) < ((rotated) ? (el.width / 2) : (el.height / 2))));
+        el.mouseDis = {
+            x: dx,
+            y: dy
+        }
+        return (onPart);
+    })
     if (found != undefined) {
         found.selected = true;
         found.moveable = true;
@@ -161,8 +173,6 @@ function mousePressed() {
             }
         }
     }
-
-    console.log(found);
 }
 
 function mouseReleased() {
@@ -182,7 +192,7 @@ function mouseReleased() {
 function rotateElement() {
     let found = elements.find(el => el.selected);
     if (found != undefined) {
-        found.rotate += PI / 2;
+        found.rotate += 90;
     }
 }
 
@@ -207,7 +217,6 @@ function changeDimensions() {
 
 function fileImport(file) {
     file = file.data;
-    console.log(file);
     boardSize = file["size"];
     elements = file["elements"];
     document.getElementsByTagName("body")[0].innerHTML = "";

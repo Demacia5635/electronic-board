@@ -13,6 +13,11 @@ class Part {
         this.selected = false;
         this.moveable = false;
 
+        this.mouseDis = {
+            x: 0,
+            y: 0
+        }
+
         this.picture = type;
     }
 }
