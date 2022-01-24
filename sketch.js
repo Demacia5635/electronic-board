@@ -13,7 +13,8 @@ let pictures = {
     "vrm": "",
     "radio": "",
     "breaker": "",
-    "pi": ""
+    "pi": "",
+    "pigeon": ""
 }
 
 let sizes = {
@@ -48,18 +49,23 @@ let sizes = {
     "nano": {
         width: 45 / prop,
         height: 18 / prop
+    },
+    "pigeon": {
+        width: 38.1 / prop,
+        height: 38.1 / prop
     }
 }
 
 function preload() {
-    pictures["pdp"] = loadImage("https://raw.githubusercontent.com/MittyRobotics/tko-electronics-sim/master/assets/img/hardware/pdp.png");
-    pictures["radio"] = loadImage("https://raw.githubusercontent.com/MittyRobotics/tko-electronics-sim/master/assets/img/hardware/radio.png");
-    pictures["talon"] = loadImage("https://raw.githubusercontent.com/MittyRobotics/tko-electronics-sim/master/assets/img/hardware/talon.png");
-    pictures["vrm"] = loadImage("https://raw.githubusercontent.com/MittyRobotics/tko-electronics-sim/master/assets/img/hardware/vrm.png");
-    pictures["robo"] = loadImage("https://raw.githubusercontent.com/MittyRobotics/tko-electronics-sim/master/assets/img/hardware/roborio.png");
-    pictures["breaker"] = loadImage("https://raw.githubusercontent.com/MittyRobotics/tko-electronics-sim/master/assets/img/hardware/breaker.png");
-    pictures["pi"] = loadImage("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQV177_cY8jMSjXrogjGpuRrfKUUBd0fcuL5Q&usqp=CAU");
-    pictures["nano"] = loadImage("https://cdn.shopify.com/s/files/1/1641/0911/products/nano-v30-micro-controller-with-atmega328p-16mhz-50v-ch340g-usb-driver-mini-usb-connector-439384_1200x1200.jpg?v=1633023487");
+    pictures["pdp"] = loadImage("https://raw.githubusercontent.com/Demacia5635/electronic-board/master/images/pdp.png");
+    pictures["radio"] = loadImage("https://raw.githubusercontent.com/Demacia5635/electronic-board/master/images/radio.png");
+    pictures["talon"] = loadImage("https://raw.githubusercontent.com/Demacia5635/electronic-board/master/images/talon.png");
+    pictures["vrm"] = loadImage("https://raw.githubusercontent.com/Demacia5635/electronic-board/master/images/vrm.png");
+    pictures["robo"] = loadImage("https://raw.githubusercontent.com/Demacia5635/electronic-board/master/images/roborio.png");
+    pictures["breaker"] = loadImage("https://raw.githubusercontent.com/Demacia5635/electronic-board/master/images/breaker.png");
+    pictures["pi"] = loadImage("https://raw.githubusercontent.com/Demacia5635/electronic-board/master/images/pi.png");
+    pictures["nano"] = loadImage("https://raw.githubusercontent.com/Demacia5635/electronic-board/master/images/nano.png");
+    pictures["pigeon"] = loadImage("https://raw.githubusercontent.com/Demacia5635/electronic-board/master/images/pigeon.png");
 }
 
 function setup() {
@@ -112,6 +118,7 @@ function Canvas() {
     createButton("Add Breaker").position(width + 10, 160).mousePressed(() => elements.push(new Part("breaker", 0, 0)))
     createButton("Add Raspberry Pi").position(width + 10, 190).mousePressed(() => elements.push(new Part("pi", 0, 0)))
     createButton("Add Arduino Nano").position(width + 10, 220).mousePressed(() => elements.push(new Part("nano", 0, 0)))
+    createButton("Add Pigeon IMU").position(width + 10, 250).mousePressed(() => elements.push(new Part("pigeon", 0, 0)))
 
     createButton("Delete Element").position(173.43, height + 12).mousePressed(deleteElement);
     createButton("Clear Board").position(290.57, height + 12).mousePressed(clearBoard);
